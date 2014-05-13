@@ -1,0 +1,38 @@
+This project is an implementation of 
+
+
+
+
+
+
+(a) IcosahedronMesh.m, TriQuad.m, SubdivideSpherical is from Anton Semechko 's code:
+        http://www.mathworks.com/matlabcentral/fileexchange/37004-uniform-sampling-of-a-sphere
+    The code is for creating an icosahedron and then subdivide it many times, sample usage:
+    
+    >> TR = IcosahedronMesh     % return a TriRep class, which will be removed from Matlab in near future
+    TR = 
+      TriRep
+      Properties:
+                    X: [12x3 double]
+        Triangulation: [20x3 double]
+      Methods
+    >> figure, h=trimesh(TR); set(h,'EdgeColor','b'), axis equal    % visualize base icosahedron with 12 points and 20 faces
+    >> figure, h=trimesh(SubdivideSphericalMesh(TR, 1)); set(h,'EdgeColor','b'), axis equal % after 1 time of subdivision, each face now become 4 faces
+    >> figure, h=trimesh(SubdivideSphericalMesh(TR, 2)); set(h,'EdgeColor','b'), axis equal
+    >> figure, h=trimesh(SubdivideSphericalMesh(TR, 3)); set(h,'EdgeColor','b'), axis equal
+    >> figure, h=trimesh(SubdivideSphericalMesh(TR, 4)); set(h,'EdgeColor','b'), axis equal
+
+    The coordinates of uniformly distributed points is saved in TR.X, there are also many other available properties and functions for your needs.
+    
+(b) nearestneighbour.m is from Richard Brown's code:
+        http://www.mathworks.com/matlabcentral/fileexchange/12574-nearestneighbour-m
+    The code is for finding the k nearest neighbours in any dimension, i use it to find the nearest icosahedron vertice given a raw light direction
+
+(c) shapeletsurf.m, grad2slanttilt.m, needleplotst.m are from Peter Kovesi's code:
+        http://www.csse.uwa.edu.au/~pk/Research/MatlabFns/
+    The code is for surface reconstrution based on normals, basically is to get the depth information of each pixel, i use it to view the stereo result.
+    There is a shapletTest.m file to test the usage of the shapeletsurf lib.
+    
+(d) gco3.0 library if from 
+        http://vision.csd.uwo.ca/code/
+    it's a wrapper of many codes which are contributed by many people, including a matlab implementation. I use it for the refinement of normals.
